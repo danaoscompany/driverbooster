@@ -31,7 +31,7 @@ class Admin extends CI_Controller {
 		$link = $this->input->post('link');
 		$type = $this->input->post('type');
 		$date = $this->input->post('date');
-		if ($type == 'image') {
+		if ($type == 'all' || $type == 'image') {
 			$config = array(
 				'upload_path' => './userdata/',
 				'allowed_types' => "*",
@@ -49,12 +49,21 @@ class Admin extends CI_Controller {
 					'type' => $type,
 					'date' => $date
 				));
-				FCM::send_image_notification_to_topic($title, $content, $imgURL, 'driverbooster', array(
-					'link' => $link,
-					'type' => $type,
-					'image' => $imgURL,
-					'date' => $date
-				));
+				if ($type == 'all') {
+					FCM::send_notification_to_topic_all_types($title, $content, $link, $imgURL, 'driverbooster', array(
+						'link' => $link,
+						'type' => $type,
+						'image' => $imgURL,
+						'date' => $date
+					));
+				} else if ($type == 'image') {
+					FCM::send_image_notification_to_topic($title, $content, $imgURL, 'driverbooster', array(
+						'link' => $link,
+						'type' => $type,
+						'image' => $imgURL,
+						'date' => $date
+					));
+				}
 			} else {
 				echo json_encode($this->upload->display_errors());
 			}
