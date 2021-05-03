@@ -9,7 +9,7 @@ class FCM {
             'notification' => array(
             	'title' => $title,
             	'body' => $body,
-            	'click_action' => 'openlink'
+            	'click_action' => 'openlink',
             	'image' => $imgURL
             )
     	);
