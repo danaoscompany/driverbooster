@@ -40,7 +40,7 @@ class Admin extends CI_Controller {
 			$this->load->library('upload', $config);
 			if ($this->upload->do_upload('file')) {
 				$filePath = $this->upload->data()['file_name'];
-				$imgURL = base_url() . "/userdata/" . $filePath;
+				$imgURL = "https://driverbooster.my.id/driverbooster/userdata/" . $filePath;
 				$this->db->insert('notifications', array(
 					'title' => $title,
 					'content' => $content,
