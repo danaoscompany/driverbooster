@@ -9,10 +9,11 @@ class FCM {
             'notification' => array(
             	'title' => $title,
             	'body' => $body,
-            	'link' => $link,
+            	'click_action' => 'openlink'
             	'image' => $imgURL
             )
     	);
+    	$data['link'] = $link;
     	if (sizeof($data) > 0) {
     		$fields['data'] = $data;
     	}
@@ -65,9 +66,10 @@ class FCM {
             'notification' => array(
             	'title' => $title,
             	'body' => $body,
-            	'link' => $link
+            	'click_action' => 'openlink'
             )
     	);
+    	$data['link'] = $link;
     	if (sizeof($data) > 0) {
     		$fields['data'] = $data;
     	}
