@@ -90,4 +90,160 @@ class Admin extends CI_Controller {
 			}
 		}
 	}
+	
+	public function add_garage() {
+		$name = $this->input->post('name');
+		$phone = $this->input->post('phone');
+		$address = $this->input->post('address');
+		$lat = $this->input->post('lat');
+		$lng = $this->input->post('lng');
+		$photoChanged = intval($this->input->post('photo_changed'));
+		if ($photoChanged == 1) {
+			$config = array(
+				'upload_path' => './userdata/',
+				'allowed_types' => "*",
+				'overwrite' => TRUE
+			);
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('file')) {
+				$this->db->insert('garages', array(
+					'name' => $name,
+					'phone' => $phone,
+					'image' => $this->upload->data()['file_name'],
+					'address' => $address,
+					'latitude' => $lat,
+					'longitude' => $lng
+				));
+			}
+		} else {
+			$this->db->insert('garages', array(
+				'name' => $name,
+				'phone' => $phone,
+				'address' => $address,
+				'latitude' => $lat,
+				'longitude' => $lng
+			));
+		}
+	}
+	
+	public function update_garage() {
+		$id = intval($this->input->post('id'));
+		$name = $this->input->post('name');
+		$phone = $this->input->post('phone');
+		$address = $this->input->post('address');
+		$lat = $this->input->post('lat');
+		$lng = $this->input->post('lng');
+		$photoChanged = intval($this->input->post('photo_changed'));
+		if ($photoChanged == 1) {
+			$config = array(
+				'upload_path' => './userdata/',
+				'allowed_types' => "*",
+				'overwrite' => TRUE
+			);
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('file')) {
+				$this->db->where('id', $id);
+				$this->db->update('garages', array(
+					'name' => $name,
+					'phone' => $phone,
+					'image' => $this->upload->data()['file_name'],
+					'address' => $address,
+					'latitude' => $lat,
+					'longitude' => $lng
+				));
+			}
+		} else {
+			$this->db->where('id', $id);
+			$this->db->update('garages', array(
+				'name' => $name,
+				'phone' => $phone,
+				'address' => $address,
+				'latitude' => $lat,
+				'longitude' => $lng
+			));
+		}
+	}
+	
+	public function add_opreker() {
+		$name = $this->input->post('name');
+		$phone = $this->input->post('phone');
+		$address = $this->input->post('address');
+		$lat = $this->input->post('lat');
+		$lng = $this->input->post('lng');
+		$photoChanged = intval($this->input->post('photo_changed'));
+		if ($photoChanged == 1) {
+			$config = array(
+				'upload_path' => './userdata/',
+				'allowed_types' => "*",
+				'overwrite' => TRUE
+			);
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('file')) {
+				$this->db->insert('oprekers', array(
+					'name' => $name,
+					'phone' => $phone,
+					'logo' => $this->upload->data()['file_name'],
+					'address' => $address,
+					'latitude' => $lat,
+					'longitude' => $lng
+				));
+			}
+		} else {
+			$this->db->insert('oprekers', array(
+				'name' => $name,
+				'phone' => $phone,
+				'address' => $address,
+				'latitude' => $lat,
+				'longitude' => $lng
+			));
+		}
+	}
+	
+	public function update_opreker() {
+		$id = intval($this->input->post('id'));
+		$name = $this->input->post('name');
+		$phone = $this->input->post('phone');
+		$address = $this->input->post('address');
+		$lat = $this->input->post('lat');
+		$lng = $this->input->post('lng');
+		$photoChanged = intval($this->input->post('photo_changed'));
+		if ($photoChanged == 1) {
+			$config = array(
+				'upload_path' => './userdata/',
+				'allowed_types' => "*",
+				'overwrite' => TRUE
+			);
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('file')) {
+				$this->db->where('id', $id);
+				$this->db->update('oprekers', array(
+					'name' => $name,
+					'phone' => $phone,
+					'logo' => $this->upload->data()['file_name'],
+					'address' => $address,
+					'latitude' => $lat,
+					'longitude' => $lng
+				));
+			}
+		} else {
+			$this->db->where('id', $id);
+			$this->db->update('oprekers', array(
+				'name' => $name,
+				'phone' => $phone,
+				'address' => $address,
+				'latitude' => $lat,
+				'longitude' => $lng
+			));
+		}
+	}
+	
+	public function delete_garage() {
+		$id = $this->input->post('id');
+		$this->db->query("DELETE FROM `garages` WHERE `id`=" . $id);
+	}
+	
+	public function delete_opreker() {
+		$id = $this->input->post('id');
+		$this->db->query("DELETE FROM `oprekers` WHERE `id`=" . $id);
+	}
 }
