@@ -25,6 +25,12 @@ class Admin extends CI_Controller {
 		echo json_encode($this->db->query("SELECT * FROM `notifications` ORDER BY `date` DESC LIMIT " . $start . "," . $length)->result_array());
 	}
 	
+	public function get_users() {
+		$start = intval($this->input->post('start'));
+		$length = intval($this->input->post('length'));
+		echo json_encode($this->db->query("SELECT * FROM `users` ORDER BY `name` LIMIT " . $start . "," . $length)->result_array());
+	}
+	
 	public function add_notification() {
 		$title = $this->input->post('title');
 		$content = $this->input->post('content');
@@ -245,5 +251,15 @@ class Admin extends CI_Controller {
 	public function delete_opreker() {
 		$id = $this->input->post('id');
 		$this->db->query("DELETE FROM `oprekers` WHERE `id`=" . $id);
+	}
+	
+	public function activate_user() {
+		$id = $this->input->post('id');
+		$this->db->query("UPDATE `users` SET `active`=1 WHERE `id`=" . $id);
+	}
+	
+	public function deactivate_user() {
+		$id = $this->input->post('id');
+		$this->db->query("UPDATE `users` SET `active`=0 WHERE `id`=" . $id);
 	}
 }
