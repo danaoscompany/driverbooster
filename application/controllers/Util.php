@@ -12,7 +12,7 @@ class Util {
 	public static function send_email($to, $subject, $body) {
 		$mail = new PHPMailer(true);
 		try {
-    		$mail->SMTPDebug = 2;
+    		$mail->SMTPDebug = 0;
     		$mail->isSMTP();
     		$mail->Host = 'smtp-relay.sendinblue.com';
     		$mail->SMTPAuth = true;
