@@ -19,19 +19,18 @@ class Test extends CI_Controller {
 		try {
     		$mail->SMTPDebug = 2;
     		$mail->isSMTP();
-    		$mail->Host = 'mail.redowl.web.id';
+    		$mail->Host = 'smtp-relay.sendinblue.com';
     		$mail->SMTPAuth = true;
-    		$mail->Username = 'admin2@redowl.web.id';
-    		$mail->Password = 'u6ZR!SHaf7Or';
-    		$mail->SMTPSecure = 'ssl';
-    		$mail->Port = 465;
-    		$mail->setFrom('admin2@redowl.web.id', 'Driver Booster Admin');
-    		$mail->addAddress('danaoscompany@gmail.com', 'Dana Prakoso');
-    		$mail->addReplyTo('admin2@redowl.web.id', 'Driver Booster Admin');
+    		$mail->Username = 'oprekmaniacom@gmail.com';
+    		$mail->Password = 'YR34KmgwFQVxavNt';
+    		$mail->SMTPSecure = 'tls';
+    		$mail->Port = 587;
+    		$mail->setFrom('oprekmaniacom@gmail.com', 'Driver Booster Admin');
+    		$mail->addAddress('danaoscompany@gmail.com', 'Driver Booster User');
+    		$mail->addReplyTo('oprekmaniacom@gmail.com', 'Driver Booster Admin');
     		$mail->isHTML(true);
-    		$mail->Subject = 'Here is the subject';
-    		$mail->Body = 'This is the HTML message body <b>in bold!</b>';
-    		$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    		$mail->Subject = 'This is subject';
+    		$mail->Body = 'This is body';
     		$mail->send();
 		} catch (Exception $e) {
     		echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
